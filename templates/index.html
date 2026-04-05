@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>URL Shortener</title>
+    <title>Shortify</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -67,7 +67,7 @@
 </head>
 <body>
     <div class="card">
-        <h2>🔗 URL Shortener</h2>
+        <h2>Shortify: A URL Shortener</h2>
         <input type="text" id="longUrl" placeholder="Enter your long URL here..." />
         <button onclick="shortenURL()">Shorten URL</button>
         <div class="result" id="result"></div>
@@ -92,7 +92,7 @@
                 const response = await fetch("/shorten", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ long_url: fullUrl })
+                    body: JSON.stringify({ url: fullUrl })
                 });
 
                 const data = await response.json();
@@ -100,14 +100,14 @@
                 if (data.short_url) {
                     result.className = "result";
                     result.style.display = "block";
-                    result.innerHTML = `✅ Short URL: <a href="${data.short_url}" target="_blank">${data.short_url}</a>`;
+                    result.innerHTML = `Short URL: <a href="${data.short_url}" target="_blank">${data.short_url}</a>`;
                 } else {
                     throw new Error("No short URL returned");
                 }
             } catch (err) {
                 result.className = "result error";
                 result.style.display = "block";
-                result.textContent = "❌ Error: Could not shorten URL. Is Flask running?";
+                result.textContent = "Error: Could not shorten URL. Is Flask running?";
             }
         }
 
